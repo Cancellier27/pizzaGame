@@ -13,7 +13,7 @@ class Overworld {
     }
     image.src = "/images/maps/Demolower.png"
 
-    //place some Game Objects
+    //place some Game Objects (characters)
     const hero = new GameObject({
       x: 5, y: 6,
     })
