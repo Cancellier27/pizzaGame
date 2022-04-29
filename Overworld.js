@@ -18,7 +18,9 @@ class Overworld {
 
       // draw game Objects
       Object.values(this.map.gameObjects).forEach(object => {
-        object.x += 1
+        object.update({
+          arrow: this.directionInput.direction
+        })
         object.sprite.draw(this.ctx)
       })
       
@@ -34,14 +36,14 @@ class Overworld {
 
   init() {
     this.map = new OverworldMap(window.OverworldMaps.DemoRoom)
-    this.startGameLoop()
-
     
-
+    this.directionInput = new DirectionInput()
+    this.directionInput.init() 
+    this.directionInput.direction // down
+    
+    this.startGameLoop()
   }
 }
 
 // asprite to edit pixelArt
 
-// 4:10
-// https://www.youtube.com/watch?v=AMHHUIkUX-g&list=PLcjhmZ8oLT0r9dSiIK6RB_PuBWlG1KSq_&index=4&ab_channel=DrewConley
