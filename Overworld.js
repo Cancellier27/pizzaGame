@@ -4,6 +4,7 @@ class Overworld {
     this.canvas = this.element.querySelector(".game-canvas")
     this.ctx = this.canvas.getContext("2d")
     this.map = null
+    this.fps = 60
   }
 
   // start the game loog fireing on every single frame loaded
@@ -26,10 +27,11 @@ class Overworld {
       
       // draw Upper Layer
       this.map.drawUpperImage(this.ctx)
-      
-      requestAnimationFrame(() => {
-        step()
-      })
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          step()
+        })
+      }, 1000 / this.fps)
     }
     step()
   }
