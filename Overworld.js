@@ -13,11 +13,7 @@ class Overworld {
     const step = () => {
 
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-
-      const cameraPerson = this.map.gameObjects.hero
-
-      // draw lower Layer
-      this.map.drawLowerImage(this.ctx)
+      
       // estabilish the camera person
       const cameraPerson = this.map.gameObjects.hero
 
@@ -37,13 +33,15 @@ class Overworld {
       })
       
       // draw Upper Layer
-      // this.map.drawUpperImage(this.ctx, cameraPerson)
+      this.map.drawUpperImage(this.ctx, cameraPerson)
 
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          step()
-        })
-      }, 1000 / this.fps)
+      requestAnimationFrame(() => {
+        step()
+      })
+      
+    //   setTimeout(() => {
+
+    //   }, 1000 / this.fps)
     }
     step()
   }
