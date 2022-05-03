@@ -14,6 +14,8 @@ class Overworld {
 
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
+      const cameraPerson = this.map.gameObjects.hero
+
       // draw lower Layer
       this.map.drawLowerImage(this.ctx)
 
@@ -22,7 +24,7 @@ class Overworld {
         object.update({
           arrow: this.directionInput.direction
         })
-        object.sprite.draw(this.ctx)
+        object.sprite.draw(this.ctx, cameraPerson)
       })
       
       // draw Upper Layer
