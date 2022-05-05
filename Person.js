@@ -37,8 +37,13 @@ class Person extends GameObject {
     // set character direction to whatever behavior has
     this.direction = behavior.direction
     if (behavior.type === "walk") {
-      // stop here if spot is not free
+      // stop here if space is not free
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+
+        behavior.retry && setTimeout(() => {
+          this.startBehavior(state, behavior)
+        }, 10)
+        
         return
       }
 
@@ -54,7 +59,6 @@ class Person extends GameObject {
           whoId: this.id
         })
       }, behavior.time) 
-      this.updateSprite(state)
     }
   }
 
