@@ -45,6 +45,16 @@ class Person extends GameObject {
       // ready to walk
       state.map.moveWall(this.x, this.y, this.direction)
       this.movingProgressRemaining = 16
+      this.updateSprite(state)
+    }
+
+    if (behavior.type === "stand") {
+      setTimeout(() => {
+        utils.emitEvent("PersonStandComplete", {
+          whoId: this.id
+        })
+      }, behavior.time) 
+      this.updateSprite(state)
     }
   }
 
@@ -52,6 +62,15 @@ class Person extends GameObject {
     const [property, change] = this.directionUpdate[this.direction]
     this[property] += change
     this.movingProgressRemaining -= 1
+
+    if(this.movingProgressRemaining === 0) {
+      // we finish walking
+
+      utils.emitEvent("PersonWalkingComplete", {
+        whoId: this.id
+      })
+
+    }
   }
 
   updateSprite() {

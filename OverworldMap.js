@@ -8,6 +8,8 @@ class OverworldMap {
 
     this.upperImage = new Image()
     this.upperImage.src = config.upperSrc
+
+    this.isCutscenePlaying = false
   }
 
   drawLowerImage(ctx, cameraPerson) {
@@ -28,11 +30,13 @@ class OverworldMap {
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach(o => {
-      
+    Object.keys(this.gameObjects).forEach(key => {
+      let object = this.gameObjects[key]
+      // assign the Id to the object name, line hero or npcA
+      object.id = key
       //TODO: determins is this object shoule actually mount
 
-      o.mount(this)
+      object.mount(this)
     })
   }
 
@@ -62,11 +66,29 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(6)
       }),
-      npc1: new Person({
+      npcA: new Person({
         x: utils.withGrid(7),
         y: utils.withGrid(9),
-        src: "/images/characters/people/npc1.png"
-      })      
+        src: "/images/characters/people/npc1.png",
+        behaviorLoop: [
+          {type: "stand", direction: "left", time: 800},
+          {type: "stand", direction: "up", time: 800},
+          {type: "stand", direction: "right", time: 1200},
+          {type: "stand", direction: "down", time: 300}
+        ]
+      }),   
+      npcB: new Person({
+        x: utils.withGrid(3),
+        y: utils.withGrid(7),
+        src: "/images/characters/people/npc2.png",
+        behaviorLoop: [
+          {type: "walk", direction: "left"},
+          {type: "stand", direction: "up", time: 800},
+          {type: "walk", direction: "up"},
+          {type: "walk", direction: "right"},
+          {type: "walk", direction: "down"}
+        ]
+      }),   
     },
     walls: {
       //"16,16": true,

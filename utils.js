@@ -2,8 +2,8 @@ const utils = {
   withGrid(n) {
     return n * 16
   },
-  asGridCoords(x,y) {
-    return `${x*16},${y*16}`
+  asGridCoords(x, y) {
+    return `${x * 16},${y * 16}`
   },
   nextPosition(initialX, initialY, direction) {
     let x = initialX
@@ -18,7 +18,15 @@ const utils = {
     } else if (direction === "down") {
       y += size
     }
-    return {x,y}
+    return {x, y}
+  },
+
+  emitEvent(name, detail) {3
+    // creating a new Custom event for the browser listem
+    const event = new CustomEvent(name, {
+      detail
+    })
+    // dispatch the event just created
+    document.dispatchEvent(event)
   }
 }
-
