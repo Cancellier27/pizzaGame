@@ -31,7 +31,7 @@ class GameObject {
 
     //Don't do anything if there is a more importante cutscene or I do not have config to 
     // do anything anyway.
-    if(map.isCutscenePlaying || this.behaviorLoop.length === 0) {
+    if(map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
       return
     }
 
