@@ -4,7 +4,7 @@ class Person extends GameObject {
     this.movingProgressRemaining = 0
     this.isStanding = false
 
-    this.inPlayerControlled = config.inPlayerControlled || false
+    this.isPlayerControlled = config.isPlayerControlled || false
 
     this.directionUpdate = {
       "up": ["y", -1],
@@ -24,7 +24,7 @@ class Person extends GameObject {
       // 
 
       // case: we're keyboard ready and habe arrow pressed
-      if (!state.map.isCutscenePlaying && this.inPlayerControlled && state.arrow) {
+      if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
         this.startBehavior(state, {
           type: "walk",
           direction: state.arrow
