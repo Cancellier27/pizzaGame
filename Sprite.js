@@ -81,7 +81,7 @@ class Sprite {
     this.animationFrameProgress = this.animationFrameLimit
     this.currentAnimationFrame += 1
 
-    if (this.frame == undefined) {
+    if (this.frame === undefined) {
       this.currentAnimationFrame = 0
     }
   }

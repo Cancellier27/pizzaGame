@@ -28,5 +28,20 @@ const utils = {
     })
     // dispatch the event just created
     document.dispatchEvent(event)
+  },
+
+  oppositeDirection(direction) {
+    switch (direction) {
+      case "right":
+        return "left"
+      case "left":
+        return "right"
+      case "up":
+        return "down"
+      default: 
+        return "up"
+    }
   }
+
+
 }
