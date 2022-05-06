@@ -61,12 +61,18 @@ class Overworld {
     this.map.startCutscene([
       {who: "hero", type: "walk", direction: "down"},
       {who: "hero", type: "walk", direction: "down"},
+      {who: "npcA", type: "walk", direction: "up"},
       {who: "npcA", type: "walk", direction: "left"},
-      {who: "npcA", type: "walk", direction: "left"},
-      {who: "npcA", type: "stand", direction: "up", time: 800},
+      {who: "hero", type: "stand", direction: "right", time: 200},
+      {type: "textMessage", text: "Hello There"}
+      // {who: "npcA", type: "stand", direction: "up", time: 800},
     ])
   }
 }
 
 // asprite to edit pixelArt
+
+
+// stopped https://www.youtube.com/watch?v=U7fYOnedjzs&list=PLcjhmZ8oLT0r9dSiIK6RB_PuBWlG1KSq_&index=9&ab_channel=DrewConley
+// 15 min
 
