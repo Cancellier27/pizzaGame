@@ -198,12 +198,12 @@ window.OverworldMaps = {
         ]
       })
     },
-    // cutsceneSpaces: {
-    //   [utils.asGridCoords(5, 10)]: [
-    //     {
-    //       events: [{type: "changeMap", map: "DemoRoom"}]
-    //     }
-    //   ]
-    // }
+    cutsceneSpaces: {
+      [utils.asGridCoords(5, 10)]: [
+        {
+          events: [{type: "changeMap", map: "DemoRoom"}]
+        }
+      ]
+    }
   }
 }
