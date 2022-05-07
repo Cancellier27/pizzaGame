@@ -163,6 +163,7 @@ window.OverworldMaps = {
             {who: "npcB", type: "stand", direction: "left", time: 100},
             {who: "hero", type: "walk", direction: "down"},
             {who: "hero", type: "walk", direction: "left"},
+            {who: "hero", type: "walk", direction: "left"},
             {who: "npcB", type: "stand", direction: "down", time: 100}
           ]
         }
@@ -196,6 +197,13 @@ window.OverworldMaps = {
           }
         ]
       })
-    }
+    },
+    // cutsceneSpaces: {
+    //   [utils.asGridCoords(5, 10)]: [
+    //     {
+    //       events: [{type: "changeMap", map: "DemoRoom"}]
+    //     }
+    //   ]
+    // }
   }
 }
