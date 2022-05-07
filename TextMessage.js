@@ -28,7 +28,6 @@ class TextMessage {
     })
 
     this.actionListener = new KeyPressListener("Enter", () => {
-      this.actionListener.unbind()
       this.done()
     })
 
@@ -36,8 +35,13 @@ class TextMessage {
   }
 
   done() {
-    this.element.remove()
-    this.onComplete()
+    if(this.revealingText.isDone){
+      this.element.remove()
+      this.actionListener.unbind()
+      this.onComplete()
+    } else {
+      this.revealingText.warpToDone()
+    }
   }
 
   init(container) {
