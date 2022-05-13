@@ -5,7 +5,7 @@ class Battle {
         {
           ...Pizzas.s001,
           team: "player",
-          hp: 30,
+          hp: 25,
           maxHp: 50,
           xp: 75,
           maxXp: 100,
@@ -38,6 +38,10 @@ class Battle {
         },
         this
       )
+    }
+    this.activeCombatants = {
+      player: "player1",
+      enemy: "enemy1"
     }
   }
 

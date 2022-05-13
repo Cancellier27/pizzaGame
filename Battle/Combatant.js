@@ -11,6 +11,14 @@ class Combatant {
     const percent = this.hp / this.maxHp * 100
     return percent > 0 ? percent : 0
   }
+  
+  get xpPercent() {
+    return this.xp / this.maxXp * 100 
+  }
+
+  get isActive() {
+    return this.battle.activeCombatants[this.team] === this.id
+  }
  
   createElement() {
     this.hudElement = document.createElement("div")
@@ -35,7 +43,14 @@ class Combatant {
     <p class="Combatant_status"></p>
   `)
 
+  this.pizzaElement = document.createElement("img")
+  this.pizzaElement.classList.add("Pizza")
+  this.pizzaElement.setAttribute("src", this.src)
+  this.pizzaElement.setAttribute("alt", this.name)
+  this.pizzaElement.setAttribute("data-team", this.team)
+
   this.hpFills = this.hudElement.querySelectorAll(".Combatant_life-container > rect")
+  this.xpFills = this.hudElement.querySelectorAll(".Combatant_xp-container > rect")
 
   }
 
@@ -44,8 +59,15 @@ class Combatant {
       this[key] = changes[key]
     })
 
-    this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`)
+    // update active flag to show the correct pizza & hud
+    this.hudElement.setAttribute("data-active", this.isActive)
+    this.pizzaElement.setAttribute("data-active", this.isActive)
 
+    // update HP & XP percentage fills
+    this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`)
+    this.xpFills.forEach(rect => rect.style.width = `${this.xpPercent}%`)
+
+    // update level on screen
     this.hudElement.querySelector(".Combatant_level").innerHTML = this.level
 
   }
@@ -53,6 +75,7 @@ class Combatant {
   init(container) {
     this.createElement()
     container.appendChild(this.hudElement)
+    container.appendChild(this.pizzaElement)
     this.update()
   }
 
