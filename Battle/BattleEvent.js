@@ -34,16 +34,23 @@ class BattleEvent {
     menu.init(this.battle.element)
   }
 
-  stateChange(resolve) {
+  async stateChange(resolve) {
     const {caster, target, damage} = this.event
     if(damage) {
       // modify the target to have less HP
+      target.update({
+        hp: target.hp - damage
+      })
 
       // start blinking
+      target.pizzaElement.classList.add("battle-damage-blink")
     }
-
+    
     //wait a little bit
+    await utils.wait(600)
+
     //stop blinking
+    target.pizzaElement.classList.remove("battle-damage-blink")
     
     resolve()
 
