@@ -3,7 +3,7 @@ window.Actions = {
     name: "Whomp!",
     success: [
       {type: "textMessage", text: "{CASTER} uses {ACTION}!"},
-      // {type: "animation", animation: "willBeDefinedHere"},
+      {type: "animation", animation: "spin"},
       {type: "stateChange", damage: 10},
     ]
   },
@@ -11,7 +11,7 @@ window.Actions = {
     name: "Pickle!",
     success: [
       {type: "textMessage", text: "{CASTER} uses {ACTION}!"},
-      // {type: "animation", animation: "willBeDefinedHere"},
+      {type: "animation", animation: "spin"},
       {type: "stateChange", damage: 10},
     ]
   }

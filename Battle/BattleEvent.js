@@ -56,6 +56,11 @@ class BattleEvent {
 
   }
 
+  animation(resolve) {
+    const fn = BattleAnimations[this.event.animation]
+    fn(this.event, resolve)
+  }
+
   init(resolve) {
     this[this.event.type](resolve)
   }
