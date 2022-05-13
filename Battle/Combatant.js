@@ -4,12 +4,17 @@ class Combatant {
       this[key] = config[key]
     })
 
-    this.battle = this.battle
+    this.battle = battle
   }
 
+  get hpPercent() {
+    const percent = this.hp / this.maxHp * 100
+    return percent > 0 ? percent : 0
+  }
+ 
   createElement() {
     this.hudElement = document.createElement("div")
-    this.hudElement.classList.add("Comabatant")
+    this.hudElement.classList.add("Combatant")
     this.hudElement.setAttribute("data-combatant", this.id)
     this.hudElement.setAttribute("data-team", this.team)
     this.hudElement.innerHTML = (`
@@ -30,10 +35,25 @@ class Combatant {
     <p class="Combatant_status"></p>
   `)
 
+  this.hpFills = this.hudElement.querySelectorAll(".Combatant_life-container > rect")
+
+  }
+
+  update(changes={}) {
+    Object.keys(changes).forEach(key => {
+      this[key] = changes[key]
+    })
+
+    this.hpFills.forEach(rect => rect.style.width = `${this.hpPercent}%`)
+
+    this.hudElement.querySelector(".Combatant_level").innerHTML = this.level
+
   }
   
-  init() {
-
+  init(container) {
+    this.createElement()
+    container.appendChild(this.hudElement)
+    this.update()
   }
 
 }
