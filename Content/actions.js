@@ -2,9 +2,17 @@ window.Actions = {
   damage1: {
     name: "Whomp!",
     success: [
-      {type: "textMessage", text: "{Caster} uses Whomp!"}
+      {type: "textMessage", text: "{CASTER} uses {ACTION}!"},
       // {type: "animation", animation: "willBeDefinedHere"},
-      // {type: "stateChange", damage: 10},
+      {type: "stateChange", damage: 10},
+    ]
+  },
+  damage2: {
+    name: "Pickle!",
+    success: [
+      {type: "textMessage", text: "{CASTER} uses {ACTION}!"},
+      // {type: "animation", animation: "willBeDefinedHere"},
+      {type: "stateChange", damage: 10},
     ]
   }
 }
