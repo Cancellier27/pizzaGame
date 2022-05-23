@@ -27,6 +27,7 @@ window.Actions = {
     name: "Olive Oil",
     success: [
       {type: "textMessage", text: "{CASTER} uses {ACTION}!"},
+      {type: "animation", animation: "glob", color: "#dafd2a"},
       {type: "stateChange", status: {type: "clumsy", expiresIn: 3}},
       {type: "textMessage", text: "{TARGET} is slipping all around!"},
     ]
