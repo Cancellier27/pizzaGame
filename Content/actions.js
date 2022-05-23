@@ -25,7 +25,6 @@ window.Actions = {
   },
   clumsyStatus: {
     name: "Olive Oil",
-    targetType: "friendly",
     success: [
       {type: "textMessage", text: "{CASTER} uses {ACTION}!"},
       {type: "stateChange", status: {type: "clumsy", expiresIn: 3}},

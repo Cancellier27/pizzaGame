@@ -83,7 +83,7 @@ class Combatant {
   }
 
   getReplacedEvents(originalEvents) {
-    if(this.status?.type === "clumsy") {
+    if(this.status?.type === "clumsy" && utils.randomFromArray([true, false, false])) {
       return [ 
         {type: "textMessage", text: `${this.name} flops over!`}
         // can add an animation here
