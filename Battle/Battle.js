@@ -10,7 +10,8 @@ class Battle {
           xp: 75,
           maxXp: 100,
           level: 1,
-          status: null
+          status: null,
+          isPlayerControlled: true
         },
         this
       ),
