@@ -9,26 +9,80 @@ class KeyboardMenu {
   setOptions(option) {
     this.options = option
     this.element.innerHTML = this.options.map((option, index) => {
-      const disabledAttr = option.desabled ? "disabled" : ""
+      const disabledAttr = option.disabled ? "disabled" : ""
+      const autoFocusAttr = index === 0 ? "autoFocus" : ""
       return (`
         <div class="option">
-          <button ${disabledAttr} data-button="${index}" data-description="${option.description}" >
+          <button ${disabledAttr} ${autoFocusAttr} data-button="${index}" data-description="${option.description}" >
             ${option.label}
           </button>
           <span class="right">${option.right ? option.right() : ""}</span>
         </div>
       `)
     }).join("")
+
+    this.element.querySelectorAll("button").forEach(button => {
+
+      button.addEventListener("click", () => {
+        const chosenOption = this.options[Number(button.dataset.button)]
+        chosenOption.handler()
+      })
+      button.addEventListener("mouseenter", () => {
+        button.focus()
+      })
+      button.addEventListener("focus", () => {
+        this.prevFocus = button
+        this.descriptionElementText.innerText = button.dataset.description
+      })
+
+    })
+
+
   }
 
   createElement() {
     this.element = document.createElement("div")
     this.element.classList.add("KeyboardMenu")
+
+    // Description box element
+    this.descriptionElement = document.createElement("div")
+    this.descriptionElement.classList.add("DescriptionBox")
+    this.descriptionElement.innerHTML = (`<p> Desctription element here</p>`)
+    this.descriptionElementText = this.descriptionElement.querySelector("p")
+  }
+ 
+  end() {
+
+    // remove menu element and desription element
+    this.element.remove()
+    this.descriptionElement.remove()
+
+    // clean up bindings
+    this.up.unbind()
+    this.down.unbind()
   }
 
   init(container) {
     this.createElement()
+    container.appendChild(this.descriptionElement)
     container.appendChild(this.element)
+
+    this.up = new KeyPressListener("ArrowUp", () => {
+      const current = Number(this.prevFocus.getAttribute("data-button"))
+      const prevButton = Array.from(this.element.querySelectorAll("button[data-button]")).reverse().find(el => {
+        return el.dataset.button < current && !el.disabled
+      })
+      prevButton?.focus()
+      
+    })
+
+    this.down = new KeyPressListener("ArrowDown", () => {
+      const current = Number(this.prevFocus.getAttribute("data-button"))
+      const nextButton = Array.from(this.element.querySelectorAll("button[data-button]")).find(el => {
+        return el.dataset.button > current && !el.disabled
+      })
+      nextButton?.focus()
+    })
   }
 
 
