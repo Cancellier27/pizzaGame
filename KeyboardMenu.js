@@ -10,10 +10,10 @@ class KeyboardMenu {
     this.options = option
     this.element.innerHTML = this.options.map((option, index) => {
       const disabledAttr = option.disabled ? "disabled" : ""
-      const autoFocusAttr = index === 0 ? "autoFocus" : ""
+
       return (`
         <div class="option">
-          <button ${disabledAttr} ${autoFocusAttr} data-button="${index}" data-description="${option.description}" >
+          <button ${disabledAttr} data-button="${index}" data-description="${option.description}" >
             ${option.label}
           </button>
           <span class="right">${option.right ? option.right() : ""}</span>
@@ -36,6 +36,10 @@ class KeyboardMenu {
       })
 
     })
+
+    setTimeout(() => {
+      this.element.querySelector("button[data-button]:not([disabled])").focus()
+    }, 10)
 
 
   }

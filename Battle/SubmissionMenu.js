@@ -45,7 +45,7 @@ class SubmissionMenu {
       ],
       attacks: [
         ...this.caster.actions.map(key => {
-          const action = Action[key]
+          const action = Actions[key]
           return {
             label: action.name,
             description: action.description,
@@ -69,9 +69,12 @@ class SubmissionMenu {
   }
 
   menuSubmit(action, instanceId=null) {
+
+    this.keyboardMenu?.end()
+
     this.onComplete({
       action,
-      target: this.enemy
+      target: action.target === "friendly" ? this.caster : this.enemy
     })
   }
 
