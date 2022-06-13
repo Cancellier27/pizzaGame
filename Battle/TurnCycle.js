@@ -18,6 +18,10 @@ class TurnCycle {
       enemy
     })
 
+    if (submission.instanceId) {
+      this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
+    }
+
     // // stop here it we are replacing thi pizza
     // if(submission.replacement) {
     //   await this.onNewEvent({
