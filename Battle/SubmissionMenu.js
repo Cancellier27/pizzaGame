@@ -3,10 +3,26 @@ class SubmissionMenu {
     this.caster = caster
     this.onComplete = onComplete
     this.enemy = enemy
+
+    let quantityMap = {}
+    items.forEach((item) => {
+      if (item.team === caster.team) {
+        let existing = quantityMap[item.actionId]
+        if (existing) {
+          existing.quantity += 1
+        } else {
+          quantityMap[item.actionId] = {
+            actionId: item.actionId,
+            quantity: 1,
+            instanceId: item.instanceId
+          }
+        }
+      }
+    })
+    this.items = Object.values(quantityMap)
   }
 
   getPages() {
-
     const backOption = {
       label: "Go Back",
       description: "Return to previous page",
@@ -24,7 +40,6 @@ class SubmissionMenu {
             // so smt when chosen
             this.keyboardMenu.setOptions(this.getPages().attacks)
           }
-
         },
         {
           label: "Items",
@@ -44,7 +59,7 @@ class SubmissionMenu {
         }
       ],
       attacks: [
-        ...this.caster.actions.map(key => {
+        ...this.caster.actions.map((key) => {
           const action = Actions[key]
           return {
             label: action.name,
@@ -54,27 +69,38 @@ class SubmissionMenu {
             }
           }
         }),
-        backOption,
+        backOption
       ],
       items: [
-        //items will go here
+        ...this.items.map((item) => {
+          const action = Actions[item.actionId]
+          return {
+            label: action.name,
+            description: action.description,
+            right: () => {
+              return "x"+item.quantity
+            },
+            handler: () => {
+              this.menuSubmit(action, item.instanceId)
+            }
+          }
+        }),
         backOption
       ],
       swap: [
-        //items will go here 
+        //items will go here
         backOption
-      ],
-
+      ]
     }
   }
 
-  menuSubmit(action, instanceId=null) {
-
+  menuSubmit(action, instanceId = null) {
     this.keyboardMenu?.end()
 
     this.onComplete({
       action,
-      target: action.target === "friendly" ? this.caster : this.enemy
+      target: action.target === "friendly" ? this.caster : this.enemy,
+      instanceId
     })
   }
 
