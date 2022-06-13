@@ -1,5 +1,5 @@
 class SubmissionMenu {
-  constructor({caster, enemy, onComplete}) {
+  constructor({caster, enemy, onComplete, items}) {
     this.caster = caster
     this.onComplete = onComplete
     this.enemy = enemy
