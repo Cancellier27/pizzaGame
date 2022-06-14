@@ -45,5 +45,15 @@ window.Actions = {
       {type: "textMessage", text: "Feeling fresh!"},    
     ],
     description: "Feeling fresh and warm",
+  },
+  item_recoverHp: {
+    name: "Parmesan",
+    targetType: "friendly",
+    success: [
+      {type: "textMessage", text: "{CASTER} sprinkles on some {ACTION}!"},
+      {type: "stateChange", recover: 10},
+      {type: "textMessage", text: "{CASTER} recovers HP!"},    
+    ],
+    description: "Heal",
   }
 }
