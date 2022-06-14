@@ -59,16 +59,18 @@ class BattleEvent {
       })
     }
 
-    if(status) {
-      who.update({
-        status: {...status}
-      })
-    }
     if(status === null) {
       who.update({
         status: null
       })
     }
+
+    if(status) {
+      who.update({
+        status: {...status}
+      })
+    }
+    
     
     //wait a little bit
     await utils.wait(600)

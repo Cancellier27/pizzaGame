@@ -46,9 +46,9 @@ class Battle {
       enemy: "enemy1"
     }
     this.items = [
-      {actionId: "item_recoverStatus", istanceId: "p1", team: "player"},
-      {actionId: "item_recoverStatus", istanceId: "p2", team: "player"},
-      {actionId: "item_recoverStatus", istanceId: "p3", team: "enemy"},
+      {actionId: "item_recoverStatus", instanceId: "p1", team: "player"},
+      {actionId: "item_recoverStatus", instanceId: "p2", team: "player"},
+      {actionId: "item_recoverStatus", instanceId: "p3", team: "enemy"},
     ]
 
   }

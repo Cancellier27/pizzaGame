@@ -99,7 +99,7 @@ class SubmissionMenu {
 
     this.onComplete({
       action,
-      target: action.target === "friendly" ? this.caster : this.enemy,
+      target: action.targetType === "friendly" ? this.caster : this.enemy,
       instanceId
     })
   }
