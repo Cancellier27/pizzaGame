@@ -1,8 +1,11 @@
 class SubmissionMenu {
-  constructor({caster, enemy, onComplete, items}) {
+  constructor({caster, enemy, onComplete, items, replacements}) {
     this.caster = caster
     this.onComplete = onComplete
+    this.replacements = replacements
     this.enemy = enemy
+
+    console.log({replacements})
 
     let quantityMap = {}
     items.forEach((item) => {

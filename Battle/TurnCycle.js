@@ -22,18 +22,18 @@ class TurnCycle {
       this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
     }
 
-    // // stop here it we are replacing thi pizza
-    // if(submission.replacement) {
-    //   await this.onNewEvent({
-    //     type: "replace",
-    //     replacement: submission.replacement
-    //   })
-    //   await this.onNewEvent({
-    //     type: "textMessage",
-    //     text: `Go get 'em, ${submission.replacement.name}`
-    //   })
-    //   return
-    // }
+    // stop here it we are replacing this pizza
+    if(submission.replacement) {
+      await this.onNewEvent({
+        type: "replace",
+        replacement: submission.replacement
+      })
+      await this.onNewEvent({
+        type: "textMessage",
+        text: `Go get 'em, ${submission.replacement.name}`
+      })
+      return
+    }
 
     const resultingEvents = caster.getReplacedEvents(submission.action.success)
 
