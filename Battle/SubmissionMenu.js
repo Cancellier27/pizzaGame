@@ -5,7 +5,6 @@ class SubmissionMenu {
     this.replacements = replacements
     this.enemy = enemy
 
-    console.log({replacements})
 
     let quantityMap = {}
     items.forEach((item) => {
@@ -57,7 +56,7 @@ class SubmissionMenu {
           description: "Change to another pizza",
           handler: () => {
             // see pizza options
-            this.keyboardMenu.setOptions(this.getPages().swap)
+            this.keyboardMenu.setOptions(this.getPages().replacements)
           }
         }
       ],
@@ -90,13 +89,28 @@ class SubmissionMenu {
         }),
         backOption
       ],
-      swap: [
-        //items will go here
+      replacements: [
+        ...this.replacements.map(replacement => {
+          return {
+            label: replacement.name,
+            description: replacement.description,
+            handler: () => {
+              this.menuSubmitReplacement(replacement)
+            }
+          }
+        }),
         backOption
       ]
     }
   }
 
+  menuSubmitReplacement(replacement) {
+    this.keyboardMenu?.end()
+    this.onComplete({
+      replacement
+    })
+  }
+ 
   menuSubmit(action, instanceId = null) {
     this.keyboardMenu?.end()
 
