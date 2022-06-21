@@ -86,6 +86,23 @@ class BattleEvent {
 
   }
 
+  async replace(resolve) {
+    const {replacement} = this.event
+
+    // Clear out the old combatant
+    const prevCombatant = this.battle.combatants[this.battle.activeCombatants[replacement.team]]
+    this.battle.activeCombatants[replacement.team] = null
+    prevCombatant.update()
+    await utils.wait(400)
+
+    // Bring in the new one
+    this.battle.activeCombatants[replacement.team] = replacement.id
+    replacement.update()
+    await utils.wait(400)
+
+    resolve()
+  }
+
   animation(resolve) {
     const fn = BattleAnimations[this.event.animation]
     fn(this.event, resolve)
@@ -96,3 +113,6 @@ class BattleEvent {
   }
 
 }
+
+
+// stopped at 10:50 css time
