@@ -9,7 +9,10 @@ class TurnCycle {
     // get the caster
     const casterId = this.battle.activeCombatants[this.currentTeam]
     const caster = this.battle.combatants[casterId]
-    const enemyId = this.battle.activeCombatants[caster.team === "player" ? "enemy" : "player"] 
+    const enemyId =
+      this.battle.activeCombatants[
+        caster.team === "player" ? "enemy" : "player"
+      ]
     const enemy = this.battle.combatants[enemyId]
 
     const submission = await this.onNewEvent({
@@ -19,11 +22,13 @@ class TurnCycle {
     })
 
     if (submission.instanceId) {
-      this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId)
+      this.battle.items = this.battle.items.filter(
+        (i) => i.instanceId !== submission.instanceId
+      )
     }
 
     // stop here it we are replacing this pizza
-    if(submission.replacement) {
+    if (submission.replacement) {
       await this.onNewEvent({
         type: "replace",
         replacement: submission.replacement
@@ -38,8 +43,7 @@ class TurnCycle {
 
     const resultingEvents = caster.getReplacedEvents(submission.action.success)
 
-
-    for( let i = 0; i < resultingEvents.length; i++ ) {
+    for (let i = 0; i < resultingEvents.length; i++) {
       const event = {
         ...resultingEvents[i],
         submission,
@@ -48,19 +52,38 @@ class TurnCycle {
         target: submission.target
       }
       await this.onNewEvent(event)
-    } 
+    }
 
     // dit the target die?
     const targetDead = submission.target.hp <= 0
     if (targetDead) {
       await this.onNewEvent({
-        type: "textMessage", text: `${submission.target.name} is ruined!`
+        type: "textMessage",
+        text: `${submission.target.name} is ruined!`
       })
+
+      if (submission.target.team === "enemy") {
+        const playerActivePizzaId = this.battle.activeCombatants.player
+        const xp = submission.target.givesXp
+
+        console.log(this.battle)
+
+        await this.onNewEvent({
+          type: "textMessage",
+          text: `${this.battle.combatants[playerActivePizzaId].name} gained ${xp} xp!`
+        })
+
+        await this.onNewEvent({
+          type: "giveXp",
+          xp: 100,
+          combatant: this.battle.combatants[playerActivePizzaId]
+        })
+      }
     }
 
     // do we have an winnig team?
     const winner = this.getWinningTeam()
-    if(winner) {
+    if (winner) {
       await this.onNewEvent({
         type: "textMessage",
         text: "Winner!"
@@ -85,11 +108,10 @@ class TurnCycle {
       })
     }
 
-
     // Check for post events
     // (Do things after your original turn submission)
     const postEvents = caster.getPostEvents()
-    for( let i = 0; i < postEvents.length; i++ ) {
+    for (let i = 0; i < postEvents.length; i++) {
       const event = {
         ...postEvents[i],
         submission,
@@ -102,7 +124,7 @@ class TurnCycle {
 
     // check for status expire
     const expiredEvent = caster.decrementStatus()
-    if(expiredEvent) {
+    if (expiredEvent) {
       await this.onNewEvent(expiredEvent)
     }
 
@@ -116,13 +138,17 @@ class TurnCycle {
 
   getWinningTeam() {
     let aliveTeams = {}
-    Object.values(this.battle.combatants).forEach(c => {
-      if(c.hp > 0) {
+    Object.values(this.battle.combatants).forEach((c) => {
+      if (c.hp > 0) {
         aliveTeams[c.team] = true
       }
     })
-    if (!aliveTeams["player"]) {return "enemy"}
-    if (!aliveTeams["enemy"]) {return "player"}
+    if (!aliveTeams["player"]) {
+      return "enemy"
+    }
+    if (!aliveTeams["enemy"]) {
+      return "player"
+    }
     return null
   }
 
@@ -135,5 +161,4 @@ class TurnCycle {
     //starts the first turn
     this.turn()
   }
-
 }

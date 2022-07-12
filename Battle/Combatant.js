@@ -20,6 +20,11 @@ class Combatant {
     return this.battle.activeCombatants[this.team] === this.id
   }
  
+  get givesXp() {
+    // cam implement this math here to make it more complex for the game itself
+    return this.level * 20
+  }
+
   createElement() {
     this.hudElement = document.createElement("div")
     this.hudElement.classList.add("Combatant")
