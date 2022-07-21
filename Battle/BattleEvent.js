@@ -133,6 +133,11 @@ class BattleEvent {
 
 
         // check if hit the level up point
+        if (combatant.xp === combatant.maxXp) {
+          combatant.xp = 0
+          combatant.maxHp = 100
+          combatant.level += 1
+        }
 
 
         combatant.update()
@@ -156,5 +161,3 @@ class BattleEvent {
 
 }
 
-
-// stopped at 10:50 css time

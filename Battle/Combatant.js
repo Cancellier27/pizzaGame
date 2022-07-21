@@ -21,7 +21,7 @@ class Combatant {
   }
  
   get givesXp() {
-    // cam implement this math here to make it more complex for the game itself
+    // can implement this math here to make it more complex for the game itself
     return this.level * 20
   }
 
