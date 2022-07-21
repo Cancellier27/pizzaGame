@@ -7,7 +7,7 @@ class Battle {
           team: "player",
           hp: 25,
           maxHp: 50,
-          xp: 75,
+          xp: 90,
           maxXp: 100,
           level: 1,
           status: {type: "saucy"},

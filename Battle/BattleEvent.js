@@ -130,7 +130,16 @@ class BattleEvent {
       if (amount > 0) {
         amount -= 1
         combatant.xp += 1
+
+
+        // check if hit the level up point
+
+
+        combatant.update()
+        requestAnimationFrame(step)
+        return
       }
+      resolve()
     }
     requestAnimationFrame(step)
   }
