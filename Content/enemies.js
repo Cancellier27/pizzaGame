@@ -1,4 +1,4 @@
-window.enemies = {
+window.Enemies = {
   "erio": {
     name: "Erio",
     src: "/images/characters/people/erio.png",
@@ -28,3 +28,5 @@ window.enemies = {
     }
   }
 }
+
+// video 18 - 15:40
