@@ -71,7 +71,7 @@ class Overworld {
   }
 
   init() {
-    this.startMap(window.OverworldMaps.Kitchen)
+    this.startMap(window.OverworldMaps.DemoRoom)
 
     this.bindActionInput()
     this.bindHeroPositionback()
@@ -82,11 +82,11 @@ class Overworld {
     
     this.startGameLoop()
 
-    this.map.startCutscene([
-      {type: "battle", enemyId: "beth"}
-      // {type: "changeMap", map: "DemoRoom"}
-      // {type: "textMessage", text: "This is my very fist message to you mate!"}
-    ])
+    // this.map.startCutscene([
+    //   {type: "battle", enemyId: "beth"}
+    //   // {type: "changeMap", map: "DemoRoom"}
+    //   // {type: "textMessage", text: "This is my very fist message to you mate!"}
+    // ])
 
   }
 }

@@ -75,12 +75,17 @@ class Battle {
       this.addCombatant("e_" + key, "enemy", this.enemy.pizza[key])
     })
 
-    this.items = [
-      // {actionId: "item_recoverStatus", instanceId: "p1", team: "player"},
-      // {actionId: "item_recoverStatus", instanceId: "p2", team: "player"},
-      // {actionId: "item_recoverStatus", instanceId: "p3", team: "enemy"},
-      // {actionId: "item_recoverHp", instanceId: "p4", team: "player"}
-    ]
+    // Starts empty
+    this.items = []
+
+    // Add in player items
+    window.playerState.items.forEach(item => {
+      this.items.push({
+        ...item,
+        team: "player"
+      })
+    })
+
     this.usedInstanceIds = {}
   }
 
@@ -154,6 +159,12 @@ class Battle {
               playerStatePizza.level = combatant.level
             }
           })
+
+          // get rid of player used items
+          playerState.item = playerState.items.filter(item => {
+            return !this.usedInstanceIds[item.instanceId]
+          })
+
         }
 
         this.element.remove()
