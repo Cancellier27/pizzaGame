@@ -103,7 +103,7 @@ class Battle {
       <img src="${"/images/characters/people/hero.png"}" alt="Hero" />
     </div>
     <div class="Battle_enemy">
-      <img src=${"/images/characters/people/npc3.png"} alt="Enemy" />
+      <img src=${this.enemy.src} alt=${this.enemy.name} />
     </div>
     `
   }
