@@ -1,6 +1,7 @@
 class TurnCycle {
-  constructor({battle, onNewEvent}) {
+  constructor({battle, onNewEvent, onWinner}) {
     this.battle = battle
+    this.onWinner = onWinner
     this.onNewEvent = onNewEvent
     this.currentTeam = "player" // or enemy
   }
@@ -22,6 +23,11 @@ class TurnCycle {
     })
 
     if (submission.instanceId) {
+
+      //Add list to persist to player state later
+      this.battle.usedInstanceIds[submission.instanceId] = true
+
+      //removing item from battle state
       this.battle.items = this.battle.items.filter(
         (i) => i.instanceId !== submission.instanceId
       )
@@ -88,7 +94,7 @@ class TurnCycle {
         type: "textMessage",
         text: "Winner!"
       })
-      // END THE BATTLE -> TODO
+      this.onWinner(winner)
       return
     }
 

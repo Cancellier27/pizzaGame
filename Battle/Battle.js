@@ -81,6 +81,7 @@ class Battle {
       // {actionId: "item_recoverStatus", instanceId: "p3", team: "enemy"},
       // {actionId: "item_recoverHp", instanceId: "p4", team: "player"}
     ]
+    this.usedInstanceIds = {}
   }
 
   addCombatant(id, team, config) {
@@ -138,6 +139,25 @@ class Battle {
           const battleEvent = new BattleEvent(event, this)
           battleEvent.init(resolve)
         })
+      },
+      onWinner: winner => {
+
+        if(winner === "player") {
+          const playerState = window.playerState
+          Object.keys(playerState.pizzas).forEach(id => {
+            const playerStatePizza = playerState.pizzas[id]
+            const combatant = this.combatants[id]
+            if(combatant) {
+              playerStatePizza.hp = combatant.hp
+              playerStatePizza.xp = combatant.xp
+              playerStatePizza.maxXp = combatant.maxXp
+              playerStatePizza.level = combatant.level
+            }
+          })
+        }
+
+        this.element.remove()
+        this.onComplete()
       }
     })
     this.turnCycle.init()
