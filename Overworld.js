@@ -71,6 +71,12 @@ class Overworld {
   }
 
   init() {
+
+    this.hud = new Hud()
+    this.hud.init(document.querySelector(".game-container"))
+
+
+
     this.startMap(window.OverworldMaps.DemoRoom)
 
     this.bindActionInput()
@@ -93,7 +99,4 @@ class Overworld {
 
 // asprite to edit pixelArt
 
-
-// stopped https://www.youtube.com/watch?v=U7fYOnedjzs&list=PLcjhmZ8oLT0r9dSiIK6RB_PuBWlG1KSq_&index=9&ab_channel=DrewConley
-// 15 min
 
