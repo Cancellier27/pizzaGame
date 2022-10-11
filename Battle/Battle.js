@@ -165,6 +165,10 @@ class Battle {
             return !this.usedInstanceIds[item.instanceId]
           })
 
+
+          // send signal to update HUD
+          utils.emitEvent("PlayerStateUpdated")
+
         }
 
         this.element.remove()

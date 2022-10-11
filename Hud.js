@@ -5,7 +5,7 @@ class Hud {
 
   update() {
     this.scoreboards.forEach(s => {
-      // update me!
+      s.update(window.playerState.pizzas[s.id])
     })
   }
 
@@ -31,6 +31,13 @@ class Hud {
   init(container) {
     this.createElement()
     container.appendChild(this.element)
+  
+    document.addEventListener("PlayerStateUpdated", () => {
+      this.update()
+    })
+  
   }
+
+  
 
 }
