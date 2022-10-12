@@ -86,6 +86,10 @@ class OverworldEvent {
 
   }
 
+  pause(resolve) {
+    console.log("pause now!!")
+  }
+
   init() {
     return new Promise((resolve) => {
       this[this.event.type](resolve)

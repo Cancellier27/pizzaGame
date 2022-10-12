@@ -11,17 +11,16 @@ class Overworld {
   // like 60hz it will be called 60 times in a sec
   startGameLoop() {
     const step = () => {
-
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-      
+
       // estabilish the camera person
       const cameraPerson = this.map.gameObjects.hero
 
       //update all objects
-      Object.values(this.map.gameObjects).forEach(object => {
+      Object.values(this.map.gameObjects).forEach((object) => {
         object.update({
           arrow: this.directionInput.direction,
-          map: this.map,
+          map: this.map
         })
       })
 
@@ -29,17 +28,19 @@ class Overworld {
       this.map.drawLowerImage(this.ctx, cameraPerson)
 
       // draw game Objects
-      Object.values(this.map.gameObjects).sort((a,b) => {
-        return a.y - b.y
-      }).forEach(object => {
-        object.sprite.draw(this.ctx, cameraPerson)
-      })
-      
+      Object.values(this.map.gameObjects)
+        .sort((a, b) => {
+          return a.y - b.y
+        })
+        .forEach((object) => {
+          object.sprite.draw(this.ctx, cameraPerson)
+        })
+
       // draw Upper Layer
       this.map.drawUpperImage(this.ctx, cameraPerson)
 
       // set 60 fps game
-        setTimeout(() => {   
+      setTimeout(() => {
         requestAnimationFrame(() => {
           step()
         })
@@ -53,14 +54,19 @@ class Overworld {
       // Is there a person here to talk to?
       this.map.checkForActionCutscene()
     })
+    new KeyPressListener("Escape", () => {
+      if (!this.map.isCutscenePlaying) {
+        this.map.startCutscene([{type: "pause"}])
+      }
+    })
   }
 
   bindHeroPositionback() {
-    document.addEventListener("PersonWalkingComplete", e => {
+    document.addEventListener("PersonWalkingComplete", (e) => {
       if (e.detail.whoId === "hero") {
         // hero position has changed
         this.map.checkForFootstepCutscene()
-      } 
+      }
     })
   }
 
@@ -71,21 +77,18 @@ class Overworld {
   }
 
   init() {
-
     this.hud = new Hud()
     this.hud.init(document.querySelector(".game-container"))
-
-
 
     this.startMap(window.OverworldMaps.DemoRoom)
 
     this.bindActionInput()
     this.bindHeroPositionback()
-    
+
     this.directionInput = new DirectionInput()
-    this.directionInput.init() 
+    this.directionInput.init()
     // this.directionInput.direction // down
-    
+
     this.startGameLoop()
 
     // this.map.startCutscene([
@@ -93,10 +96,7 @@ class Overworld {
     //   // {type: "changeMap", map: "DemoRoom"}
     //   // {type: "textMessage", text: "This is my very fist message to you mate!"}
     // ])
-
   }
 }
 
 // asprite to edit pixelArt
-
-
