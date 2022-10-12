@@ -40,11 +40,13 @@ class Overworld {
       this.map.drawUpperImage(this.ctx, cameraPerson)
 
       // set 60 fps game
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          step()
-        })
-      }, 1000 / this.fps)
+      if(!this.map.isPaused) {
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            step()
+          })
+        }, 1000 / this.fps)
+      }
     }
     step()
   }
