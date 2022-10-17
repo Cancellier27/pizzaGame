@@ -40,10 +40,13 @@ class PlayerState {
   swapLineup(oldId, incomingId) {
     const oldIndex = this.lineup.indexOf(oldId)
     this.lineup[oldIndex] = incomingId
+    utils.emitEvent("lineupChanged")
   }
 
-  moveToFront() {
-
+  moveToFront(futureFrontId) {
+    this.lineup = this.lineup.filter(id => id !== futureFrontId)
+    this.lineup.unshift(futureFrontId)
+    utils.emitEvent("lineupChanged")
   }
 
 }

@@ -19,7 +19,6 @@ class PauseMenu {
           }
         }
       })
-        console.log("aqui")
 
       return [
         ...lineupPizzas,
@@ -40,8 +39,6 @@ class PauseMenu {
       ]
     }
 
-    console.log("chegou aqui")
-
     const unequipped = Object.keys(playerState.pizzas).filter(id => {
       return playerState.lineup.indexOf(id) === -1
     }).map(id => {
@@ -51,7 +48,8 @@ class PauseMenu {
         label: `Swap for ${base.name}`,
         description: base.description,
         handler: () => {
-          //
+          playerState.swapLineup(pageKey, id)
+          this.keyboardMenu.setOptions(this.getOptions("root"))
         }
       }
     })
@@ -62,7 +60,8 @@ class PauseMenu {
         label: "Move to front",
         description: "Move this pizza to the front of the list",
         handler: () => {
-          //
+          playerState.moveToFront(pageKey)
+          this.keyboardMenu.setOptions(this.getOptions("root"))
         }
       },
       {
