@@ -4,9 +4,25 @@ class PauseMenu {
   }
 
   getOptions(pageKey) {
-    if ((pageKey = "root")) {
+
+
+    if (pageKey === "root") {
+
+      const lineupPizzas = playerState.lineup.map(id => {
+        const {pizzaId} = playerState.pizzas[id]
+        const base = Pizzas[pizzaId]
+        return {
+          label: base.name,
+          description: base.description,
+          handler: () => {
+            this.keyboardMenu.setOptions( this.getOptions(id) )
+          }
+        }
+      })
+        console.log("aqui")
+
       return [
-        // All of our pizza dynamic
+        ...lineupPizzas,
         {
           label: "Save",
           description: "save your progress",
@@ -24,7 +40,39 @@ class PauseMenu {
       ]
     }
 
-    return []
+    console.log("chegou aqui")
+
+    const unequipped = Object.keys(playerState.pizzas).filter(id => {
+      return playerState.lineup.indexOf(id) === -1
+    }).map(id => {
+      const {pizzaId} = playerState.pizzas[id]
+      const base = Pizzas[pizzaId]
+      return {
+        label: `Swap for ${base.name}`,
+        description: base.description,
+        handler: () => {
+          //
+        }
+      }
+    })
+
+    return [
+      ...unequipped,
+      {
+        label: "Move to front",
+        description: "Move this pizza to the front of the list",
+        handler: () => {
+          //
+        }
+      },
+      {
+        label: "Back",
+        description: "Back to root menu",
+        handler: () => {
+          this.keyboardMenu.setOptions(this.getOptions("root"))
+        }
+      }
+    ]
   }
 
   createElement() {
