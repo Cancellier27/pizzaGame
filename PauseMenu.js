@@ -46,14 +46,14 @@ class PauseMenu {
 
   async init(container) {
     this.createElement()
-    this.keyboardMenu = new this.KeyboardMenu({
+    this.keyboardMenu = new KeyboardMenu({
 
     })
 
     this.keyboardMenu.init(this.element)
     this.keyboardMenu.setOptions(this.getOptions("root"))
   
-    container.appenChild(this.element)
+    container.appendChild(this.element)
 
     utils.wait(200)
     this.esc = new KeyPressListener("Escape", () => {
@@ -62,4 +62,7 @@ class PauseMenu {
   
   }
 }
+
+
+
 

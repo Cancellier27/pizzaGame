@@ -87,10 +87,11 @@ class OverworldEvent {
   }
 
   pause(resolve) {
+    console.log("paused")
     this.map.isPaused = true
     const menu = new PauseMenu({
       onComplete: () => {
-        resolve
+        resolve()
         this.map.isPaused = false
         this.map.overworld.startGameLoop()
       }
