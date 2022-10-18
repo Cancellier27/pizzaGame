@@ -38,5 +38,21 @@ window.Pizzas = {
     src: "/images/characters/pizzas/f001.png",
     icon: "/images/icons/fungi.png",
     actions: ["damage1"],
-  }
+  },
+  "p001": {
+    name: "Potuguesa",
+    description: "Uma das melhores",
+    type: PizzaTypes.fungi,
+    src: "/images/characters/pizzas/f001.png",
+    icon: "/images/icons/fungi.png",
+    actions: ["clumsyStatus","saucyStatus" ,"damage1"],
+  },
+  "p002": {
+    name: "Calabresa",
+    description: "Minha mae curte essa",
+    type: PizzaTypes.fungi,
+    src: "/images/characters/pizzas/f001.png",
+    icon: "/images/icons/fungi.png",
+    actions: ["clumsyStatus","saucyStatus" ,"damage1"],
+  },
 }

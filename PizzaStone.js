@@ -1,7 +1,7 @@
 class PizzaStone extends GameObject {
   constructor(config) {
     super(config)
-    this.sprite = new this.sprite({
+    this.sprite = new Sprite({
       gameObject: this,
       src: "/images/characters/pizza-stone.png",
       animations: {
@@ -10,5 +10,29 @@ class PizzaStone extends GameObject {
       },
       currentAnimation: "used-down"
     })
+    this.storyFlag = config.storyFlag
+    this.pizzas = config.pizzas
+    
+    this.talking = [
+      {
+        required: [this.storyFlag],
+        events: [
+          {type: "textMessage", text: "You have already used this..."}
+        ]
+      },
+      {
+        events: [
+          {type: "textMessage", text: "Approaching the legendary pizza stone..."},
+          {type: "craftingMenu", pizzas: this.pizzas},
+          {type: "textMessage", text: "You have got a new item!"},
+          {type: "addStoryFlag", flag: this.storyFlag}
+        ]
+      }
+    ]
+
+  }
+
+  update() {
+    this.sprite.currentAnimation = playerState.storyFlags[this.storyFlag] ? "used-down" : "unused-down"
   }
 }
