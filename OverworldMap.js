@@ -57,7 +57,10 @@ class OverworldMap {
         event: events[i],
         map: this
       })
-      await eventHandler.init()
+      const result = await eventHandler.init()
+      if (result === "LOST_BATTLE") {
+        break
+      }
     }
 
     this.isCutscenePlaying = false
@@ -141,8 +144,10 @@ window.OverworldMaps = {
           },
           {
             events: [
-              {type: "textMessage", text: "Have you met Erio?", faceHero: "npcA"},
-              // {type: "battle", enemyId: "beth"}
+              {type: "textMessage", text: "I'm going to crush you!", faceHero: "npcA"},
+              {type: "battle", enemyId: "beth"},
+              {type: "addStoryFlag", flag: "DEFEATED_BETH"},
+              {type: "textMessage", text: "You crushed me like weak pepper", faceHero: "npcA"},
               // {type: "textMessage", text: "Go away!"},
               // {who: "hero", type: "walk", direction: "up"}
             ]
