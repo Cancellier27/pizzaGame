@@ -75,7 +75,13 @@ class OverworldMap {
       return `${object.x}, ${object.y}` === `${nextCoords.x}, ${nextCoords.y}`
     })
     if (!this.isCutscenePlaying && match && match.talking.length) {
-      this.startCutscene(match.talking[0].events)
+      const relevantScenario = match.talking.find((scenario) => {
+        return (scenario.required || []).every((sf) => {
+          return playerState.storyFlags[sf]
+        })
+      })
+
+      relevantScenario && this.startCutscene(relevantScenario.events)
     }
   }
 
@@ -123,6 +129,16 @@ window.OverworldMaps = {
           {type: "stand", direction: "down", time: 300}
         ],
         talking: [
+          {
+            required: ["TALKED_TO_ERIO"],
+            events: [
+              {
+                type: "textMessage",
+                text: "Isn't Erio the coolest?",
+                faceHero: "npcA"
+              }
+            ]
+          },
           {
             events: [
               {type: "textMessage", text: "I'm busy...", faceHero: "npcA"},

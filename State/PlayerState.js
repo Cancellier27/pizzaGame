@@ -35,6 +35,11 @@ class PlayerState {
       {actionId: "item_recoverHp", instanceId: "item2"},
       {actionId: "item_recoverHp", instanceId: "item3"},
     ]
+    this.storyFlags = {
+      // "DID_SOMETHING": true
+      // "defetaed first boss": true
+      "TALKED_TO_ERIO": true
+    }
   }
 
   swapLineup(oldId, incomingId) {
