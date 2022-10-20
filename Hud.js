@@ -44,6 +44,7 @@ class Hud {
 
     document.addEventListener("lineupChanged", () => {
       this.createElement()
+      this.update()
       container.appendChild(this.element)
     })
   
