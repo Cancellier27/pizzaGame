@@ -219,9 +219,9 @@ window.OverworldMaps = {
         {
           events: [{
           type: "changeMap", 
-          map: "Kitchen",
-          x: utils.withGrid(2),
-          y: utils.withGrid(2),
+          map: "Street",
+          x: utils.withGrid(29),
+          y: utils.withGrid(10),
           direction: "down"
         }]
         }
@@ -257,9 +257,9 @@ window.OverworldMaps = {
         {
           events: [{
             type: "changeMap",
-            map: "Street",
-            x: utils.withGrid(29),
-            y: utils.withGrid(10),
+            map: "DemoRoom",
+            x: utils.withGrid(5),
+            y: utils.withGrid(6),
             direction: "down"
           }]
         }

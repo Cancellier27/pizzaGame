@@ -80,9 +80,9 @@ class Overworld {
     if(heroInitialState) {
       const {hero} = this.map.gameObjects
       this.map.removeWall(hero.x, hero.y)
-      hero.hero.x = heroInitialState.x
-      hero.hero.y = heroInitialState.y
-      hero.hero.direction = heroInitialState.direction
+      hero.x = heroInitialState.x
+      hero.y = heroInitialState.y
+      hero.direction = heroInitialState.direction
       this.map.addWall(hero.x, hero.y)
     }
 
@@ -138,3 +138,8 @@ class Overworld {
 }
 
 // asprite to edit pixelArt
+
+
+
+/// https://www.youtube.com/watch?v=hhz6gsv8T6E&list=PLcjhmZ8oLT0r9dSiIK6RB_PuBWlG1KSq_&index=24&ab_channel=DrewConley
+
