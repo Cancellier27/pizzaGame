@@ -87,18 +87,35 @@ class Overworld {
     this.progress.StartingHeroX = this.map.gameObjects.hero.x
     this.progress.StartingHeroY = this.map.gameObjects.hero.y
     this.progress.StartingHeroDirection = this.map.gameObjects.hero.direction 
-    
+
   }
 
   init() {
 
+    // Create a new Progress Tacker
     this.progress = new Progress()
 
+    // Potentially load saved data
+    let initialHeroState = null
+    const saveFile = this.progress.getSaveFile()
+    if(saveFile) {
+      this.progress.load()
+      initialHeroState = {
+        x: this.progress.StartingHeroX,
+        y: this.progress.StartingHeroY,
+        direction: this.progress.StartingHeroDirection,
+
+      }
+    }
+
+    // Load the hud
     this.hud = new Hud()
     this.hud.init(document.querySelector(".game-container"))
 
-    this.startMap(window.OverworldMaps.Street)
+    //Start the first map
+    this.startMap(window.OverworldMaps[this.progress.mapId], initialHeroState)
 
+    //Create controls
     this.bindActionInput()
     this.bindHeroPositionback()
 
@@ -106,6 +123,7 @@ class Overworld {
     this.directionInput.init()
     // this.directionInput.direction // down
 
+    // kick off the game!
     this.startGameLoop()
 
     // this.map.startCutscene([
