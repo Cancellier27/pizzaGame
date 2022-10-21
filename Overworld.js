@@ -83,9 +83,17 @@ class Overworld {
       this.map.gameObjects.hero.direction = heroInitialState.direction
     }
 
+    this.progress.mapId = mapConfig.id
+    this.progress.StartingHeroX = this.map.gameObjects.hero.x
+    this.progress.StartingHeroY = this.map.gameObjects.hero.y
+    this.progress.StartingHeroDirection = this.map.gameObjects.hero.direction 
+    
   }
 
   init() {
+
+    this.progress = new Progress()
+
     this.hud = new Hud()
     this.hud.init(document.querySelector(".game-container"))
 

@@ -1,5 +1,6 @@
 class PauseMenu {
-  constructor({onComplete}) {
+  constructor({progress, onComplete}) {
+    this.progress = progress
     this.onComplete = onComplete
   }
 
@@ -26,7 +27,8 @@ class PauseMenu {
           label: "Save",
           description: "save your progress",
           handler: () => {
-            // ...
+            this.progress.save()
+            this.close()
           }
         },
         {
