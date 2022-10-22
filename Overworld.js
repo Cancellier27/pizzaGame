@@ -140,6 +140,3 @@ class Overworld {
 // asprite to edit pixelArt
 
 
-
-/// https://www.youtube.com/watch?v=hhz6gsv8T6E&list=PLcjhmZ8oLT0r9dSiIK6RB_PuBWlG1KSq_&index=24&ab_channel=DrewConley
-
