@@ -4,6 +4,7 @@ class TitleScreen {
   }
 
   getOptions(resolve) {
+    const saveFile = this.progress.getSaveFile()
     return [
       {
         label: "New Game",
@@ -13,8 +14,15 @@ class TitleScreen {
           resolve()
         }
       },
-      // maybe insert a Continue here
-    ]
+      saveFile ? {
+        label: "Continue Game",
+        description: "Resume your adventure",
+        handler: () => {
+          this.close()
+          resolve(saveFile)
+        }
+      } : null
+    ].filter(v => v)
   }
 
   createElement() {
