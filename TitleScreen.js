@@ -1,4 +1,4 @@
-class TitleScree {
+class TitleScreen {
   constructor({ progress }) {
     this.progress = progress
   }
@@ -21,7 +21,7 @@ class TitleScree {
     this.element = document.createElement("div")
     this.element.classList.add("TitleScreen")
     this.element.innerHTML = (`
-    <img class="TitleScreen" src="/imgaes/logo.png" alt="Pizza Legends">
+    <img class="TitleScreen_logo" src="/images/logo.png" alt="Pizza Legends">
     `)
 
   }
@@ -34,8 +34,8 @@ class TitleScree {
   init(container) {
     return new Promise(resolve => {
       this.createElement()
-      container.appenChild(this.element)
-      this.keyboardMenu = new keyboardMenu()
+      container.appendChild(this.element)
+      this.keyboardMenu = new KeyboardMenu()
       this.keyboardMenu.init(this.element)
       this.keyboardMenu.setOptions(this.getOptions(resolve))
     })
